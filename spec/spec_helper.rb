@@ -103,3 +103,15 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+require 'rspec'
+require 'datadog/ci'
+
+# Only activates test instrumentation on CI
+if ENV['DD_ENV'] == 'ci'
+    Datadog.configure do |c|
+        c.ci.enabled = true
+        c.service = 'my-ruby-app'
+        c.ci.instrument :rspec
+    end
+end
