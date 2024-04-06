@@ -29,6 +29,7 @@ PLATFORMS
 DEPENDENCIES
   rspec
   simplecov
+  ddtrace
 
 BUNDLED WITH
    2.2.22
