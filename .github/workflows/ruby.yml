@@ -31,13 +31,9 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run tests
-      run: |
-         bundle exec rspec
-         DD_CIVISIBILITY_AGENTLESS_ENABLED=true
-         DD_API_KEY=${{ secrets.DD_API_KEY }}
-         DD_SITE=us5.datadoghq.com
-         DD_ENV='ci bundle exec rake test'
       env:
         DD_CIVISIBILITY_AGENTLESS_ENABLED: 'true'
         DD_API_KEY: ${{ secrets.DD_API_KEY }}
-        DD_SITE: 'us5.datadoghq.com
+        DD_SITE: us5.datadoghq.com
+        DD_ENV: ci
+      run: bundle exec rake test
