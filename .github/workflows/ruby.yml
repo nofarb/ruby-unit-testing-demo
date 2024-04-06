@@ -23,6 +23,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby
     # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # change this to (see https://github.com/ruby/setup-ruby#versioning):
@@ -31,17 +32,6 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-    - name: Check for Gemfile.lock updates
-      run: |
-        bundle install
-        git config --global user.email "you@example.com"
-        git config --global user.name "Your Name"
-        if ! git diff --exit-code Gemfile.lock; then
-          git add Gemfile.lock
-          git commit -m "Update Gemfile.lock"
-          git push
-        fi
-        
     - name: Run tests
       env:
         DD_CIVISIBILITY_AGENTLESS_ENABLED: 'true'
